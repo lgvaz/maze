@@ -12,11 +12,6 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
     nodes = [[Node(i, j, w_spacement, h_spacement)
               for i in range(num_cols)] for j in range(num_rows)]
 
-    # Testing findng_neighbors
-    # for i_nodes in nodes:
-    #     for node in i_nodes:
-    #         node.find_neighbors(nodes, num_rows, num_cols)
-    # print(nodes[1][0].neighbors)
     # Define start and goal node
     start = nodes[0][0]
     goal = nodes[num_rows - 1][num_cols - 1]
@@ -48,7 +43,6 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
         if current is goal:
             print("Done!")
             best_path = trace_path(start, goal)
-            print(best_path)
             # Update display
             draw_nodes(screen, nodes)
             pygame.display.flip()

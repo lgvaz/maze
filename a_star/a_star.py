@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 import fire
 from node import Node
-from utils import COLORS, draw_nodes
+from utils import *
 
 def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     # Create nodes
@@ -16,19 +16,18 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     #     for node in i_nodes:
     #         node.find_neighbors(nodes, num_rows, num_cols)
     # print(nodes[1][0].neighbors)
-    # Define start node
+    # Define start and goal node
     start = nodes[0][0]
-    start.color = COLORS['green']
-    start.g_score = 0
-    ## TODO: FSCORE heuristic
-
-    # Define goal node
     goal = nodes[num_rows - 1][num_cols - 1]
+    # Define start and goal attributes
+    start.color = COLORS['green']
     goal.color = COLORS['red']
+    start.g_score = 0
+    start.f_score = start.g_score + euclidian_distance(start, goal)
     # Define unexplored nodes
     open_nodes = []
     open_nodes.append(start)
-    # Define exploerd nodes
+    # Define explored nodes
     closed_nodes = []
 
     # Pygame setup

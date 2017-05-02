@@ -15,10 +15,14 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     # for i_nodes in nodes:
     #     for node in i_nodes:
     #         node.find_neighbors(nodes, num_rows, num_cols)
-    # print(nodes[1][0].neighbors)    
-    # Define start and goal
+    # print(nodes[1][0].neighbors)
+    # Define start node
     start = nodes[0][0]
     start.color = COLORS['green']
+    start.g_score = 0
+    ## TODO: FSCORE heuristic
+
+    # Define goal node
     goal = nodes[num_rows - 1][num_cols - 1]
     goal.color = COLORS['red']
     # Define unexplored nodes

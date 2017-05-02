@@ -18,7 +18,6 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     # print(nodes[1][0].neighbors)
     # Define start and goal node
     start = nodes[0][0]
-    start = nodes[num_rows - 1][num_cols - 1]
     goal = nodes[num_rows - 1][num_cols - 1]
     # Define start and goal attributes
     start.color = COLORS['green']
@@ -37,10 +36,34 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     done = False
     # Main loop
     while not done:
-        current = find_best_f(open_nodes)
+        # Find the best node to expand
+        if len(open_nodes) > 0:
+            current = find_best_f(open_nodes)
+        else:
+            print("Failure!")
+            break
+        # Check if current node is the goal
         if current is goal:
             print("Done!")
             break
+
+        #
+        open_nodes.remove(current)
+        closed_nodes.append(current)
+        # Begin exploring current neighbors
+        neighbors = current.find_neighbors(nodes, num_rows, num_cols)
+        for neighbor in neighbors:
+            # Ignore neighbor which is already evaluated
+            if neighbor in closed_nodes:
+                continue
+            # Find g score through current path
+            neighbor_g = current.g_score + 1
+            if neighbor_g < neighbor.g_score:
+                neighbor.g_score = neighbor_g
+            # Added neighbor to open_nodes if it isn't present
+            if neighbor not in open_nodes:
+                open_nodes.append(neighbor)
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,6 +71,11 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
         # Update display
         draw_nodes(screen, nodes)
         pygame.display.flip()
+
+    for nodes_ in nodes:
+        print('\n')
+        for node in nodes_:
+            print(node.g_score, end='|')
 
 if __name__ == '__main__':
     fire.Fire(search)

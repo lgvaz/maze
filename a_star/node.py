@@ -22,3 +22,4 @@ class Node:
                 if i_ == self.i and j_ == self.j:
                     continue
                 self.neighbors.append(nodes[i_][j_])
+        return self.neighbors

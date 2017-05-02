@@ -18,6 +18,7 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     # print(nodes[1][0].neighbors)
     # Define start and goal node
     start = nodes[0][0]
+    start = nodes[num_rows - 1][num_cols - 1]
     goal = nodes[num_rows - 1][num_cols - 1]
     # Define start and goal attributes
     start.color = COLORS['green']
@@ -36,10 +37,14 @@ def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
     done = False
     # Main loop
     while not done:
+        current = find_best_f(open_nodes)
+        if current is goal:
+            print("Done!")
+            break
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-
         # Update display
         draw_nodes(screen, nodes)
         pygame.display.flip()

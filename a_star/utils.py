@@ -16,3 +16,10 @@ def draw_nodes(surface, nodes):
 def euclidian_distance(node, goal):
     return ((goal.position[0] - node.position[0])**2 +
             (goal.position[1] - node.position[1])**2) ** 0.5
+
+def find_best_f(nodes):
+    current_best = nodes[0]
+    for node in nodes:
+        if node.f_score < current_best.f_score:
+            current_best = node
+    return current_best

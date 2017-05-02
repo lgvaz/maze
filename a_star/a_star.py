@@ -3,22 +3,16 @@ import pygame
 import fire
 from node import Node
 
-# Constants
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-WHITE = (255, 255, 255)
+def search(num_rows=10, num_cols=10, WIDTH=400, HEIGHT=300):
+    # Create nodes
+    x_spacement = WIDTH // num_rows
+    y_spacement = HEIGHT // num_cols
+    nodes = [[Node(i, j, x_spacement, y_spacement) for i in range(num_rows)] for j in range(num_cols)]
 
-def search(WIDTH=400, HEIGHT=300):
     # Pygame setup
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     done = False
-
-    # Create nodes
-    nodes = [[Node for i in range(5)] for j in range(5)]
-    print(nodes)
-
     # Main loop
     while not done:
         for event in pygame.event.get():
@@ -26,9 +20,13 @@ def search(WIDTH=400, HEIGHT=300):
                 done = True
 
         # Update display
+        draw_nodes(screen, nodes)
         pygame.display.flip()
 
-    #def draw_grid():
+def draw_nodes(surface, nodes):
+    for i_nodes in nodes:
+        for node in i_nodes:
+            pygame.draw.circle(surface, node.color, node.position, node.radius)
 
 if __name__ == '__main__':
     fire.Fire(search)

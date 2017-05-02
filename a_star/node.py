@@ -1,9 +1,9 @@
 from utils import COLORS
 class Node:
-    def __init__(self, x, y, x_spacement, y_spacement):
+    def __init__(self, x, y, w_spacement, h_spacement):
         self.color = COLORS['white']
         self.radius = 10
-        self.position = (x * x_spacement + self.radius,
-                         y * y_spacement + self.radius)
-        self.x = x * x_spacement
-        self.y = y * y_spacement
+        self.position = (x * w_spacement + w_spacement // 2,
+                         y * h_spacement + h_spacement // 2)
+        self.x = x * w_spacement
+        self.y = y * h_spacement

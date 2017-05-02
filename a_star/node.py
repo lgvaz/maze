@@ -3,6 +3,7 @@ class Node:
     def __init__(self, i, j, w_spacement, h_spacement):
         self.color = COLORS['white']
         self.radius = 10
+        self.parent = None
         # Node idxs
         self.i = i
         self.j = j

@@ -1,9 +1,17 @@
 from utils import COLORS
 class Node:
-    def __init__(self, x, y, w_spacement, h_spacement):
+    def __init__(self, i, j, w_spacement, h_spacement):
         self.color = COLORS['white']
         self.radius = 10
-        self.position = (x * w_spacement + w_spacement // 2,
-                         y * h_spacement + h_spacement // 2)
-        self.x = x * w_spacement
-        self.y = y * h_spacement
+        self.i = i
+        self.j = j
+        self.position = (i * w_spacement + w_spacement // 2,
+                         j * h_spacement + h_spacement // 2)
+
+    def find_neighbors(self, nodes, num_rows, num_cols):
+        self.neighbors = []
+        for i_ in range(max(0, self.i - 1), min(self.i + 2, num_rows)):
+            for j_ in range(max(0, self.j - 1), min(self.j + 2, num_cols)):
+                if i_ == self.i and j_ == self.j:
+                    continue
+                self.neighbors.append(nodes[i_][j_])

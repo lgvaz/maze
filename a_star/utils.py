@@ -5,6 +5,7 @@ COLORS = {
     'red': (255, 0, 0),
     'green': (0, 255, 0),
     'blue': (0, 0, 255),
+    'purple': (200, 0, 200),
     'white': (255, 255, 255)
 }
 
@@ -23,3 +24,12 @@ def find_best_f(nodes):
         if node.f_score < current_best.f_score:
             current_best = node
     return current_best
+
+def trace_path(start, goal):
+    path = []
+    current = goal
+    while current is not start:
+        current.color = COLORS['purple']
+        path.append(current)
+        current = current.parent
+    return path

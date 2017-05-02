@@ -47,6 +47,11 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
         # Check if current node is the goal
         if current is goal:
             print("Done!")
+            best_path = trace_path(start, goal)
+            print(best_path)
+            # Update display
+            draw_nodes(screen, nodes)
+            pygame.display.flip()
             break
 
         #

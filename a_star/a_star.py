@@ -5,7 +5,7 @@ from node import Node
 from utils import *
 import time
 
-def search(num_rows=100, num_cols=100, WIDTH=600, HEIGHT=600, wall_pct=0.3, shape='rect'):
+def search(num_rows=100, num_cols=100, WIDTH=600, HEIGHT=600, wall_pct=0.3, shape='circle'):
     # Create nodes
     w_spacement = WIDTH // num_cols
     h_spacement = HEIGHT // num_rows
@@ -18,6 +18,8 @@ def search(num_rows=100, num_cols=100, WIDTH=600, HEIGHT=600, wall_pct=0.3, shap
     # Define start and goal attributes
 #    start.color = COLORS['green']
     goal.color = COLORS['goal']
+    start.wall = False
+    goal.wall = False
     start.g_score = 0
     start.f_score = start.g_score + euclidian_distance(start, goal)
     # Define unexplored nodes
@@ -78,7 +80,7 @@ def search(num_rows=100, num_cols=100, WIDTH=600, HEIGHT=600, wall_pct=0.3, shap
         draw_nodes(screen, nodes, shape)
         pygame.display.flip()
 
-        #time.sleep(.2)
+        #time.sleep(5)
 
     # Don't close screen after the code was executed, instead wait for user to close
     while not done:

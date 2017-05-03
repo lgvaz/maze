@@ -33,7 +33,7 @@ def trace_path(start, goal):
     path = []
     current = goal
     while current is not start:
-        #current.color = COLORS['purple']
+        current.color = COLORS['purple']
         path.append(current)
         current = current.parent
     return path

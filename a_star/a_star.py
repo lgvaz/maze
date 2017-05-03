@@ -5,11 +5,11 @@ from node import Node
 from utils import *
 import time
 
-def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600):
+def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
     # Create nodes
     w_spacement = WIDTH // num_cols
     h_spacement = HEIGHT // num_rows
-    nodes = [[Node(i, j, w_spacement, h_spacement)
+    nodes = [[Node(i, j, w_spacement, h_spacement, wall_pct)
               for j in range(num_cols)] for i in range(num_rows)]
 
     # Define start and goal node
@@ -54,8 +54,8 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600):
         # Begin exploring current neighbors
         neighbors = current.find_neighbors(nodes, num_rows, num_cols)
         for neighbor in neighbors:
-            # Ignore neighbor which is already evaluated
-            if neighbor in closed_nodes:
+            # Ignore a wall or neighbor which is already evaluated
+            if neighbor.wall or neighbor in closed_nodes:
                 continue
             # Find g score through current path
             neighbor_g = current.g_score + 1
@@ -78,7 +78,7 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600):
         draw_nodes(screen, nodes)
         pygame.display.flip()
 
-        time.sleep(.5)
+        #time.sleep(.2)
 
     # Don't close screen after the code was executed, instead wait for user to close
     while not done:

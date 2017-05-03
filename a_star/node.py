@@ -1,7 +1,16 @@
+from numpy.random import uniform
 from utils import COLORS
+
 class Node:
-    def __init__(self, i, j, w_spacement, h_spacement):
-        self.color = COLORS['gray2']
+    def __init__(self, i, j, w_spacement, h_spacement, wall_pct):
+        # Maybe node is a wall
+        if uniform() < wall_pct:
+            self.wall = True
+            self.color = COLORS['white']
+        else:
+            self.wall = False
+            self.color = COLORS['gray2']
+
         self.radius = 3
         self.parent = None
         # Node idxs

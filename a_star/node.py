@@ -6,10 +6,10 @@ class Node:
         # Maybe node is a wall
         if uniform() < wall_pct:
             self.wall = True
-            self.color = COLORS['white']
+            self.color = COLORS['wall']
         else:
             self.wall = False
-            self.color = COLORS['gray2']
+            self.color = COLORS['node']
 
         self.radius = 3
         self.parent = None

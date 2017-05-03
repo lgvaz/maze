@@ -14,10 +14,10 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
 
     # Define start and goal node
     start = nodes[0][0]
-    goal = nodes[13][num_cols - 7]
+    goal = nodes[num_rows - 1][num_cols - 1]
     # Define start and goal attributes
-    start.color = COLORS['green']
-    goal.color = COLORS['red']
+#    start.color = COLORS['green']
+    goal.color = COLORS['goal']
     start.g_score = 0
     start.f_score = start.g_score + euclidian_distance(start, goal)
     # Define unexplored nodes
@@ -35,16 +35,17 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
         # Find the best node to expand
         if len(open_nodes) > 0:
             current = find_best_f(open_nodes)
-            current.color = COLORS['blue']
+            current.color = COLORS['path']
         else:
             print("Failure!")
             break
         # Check if current node is the goal
         if current is goal:
             print("Done!")
-            best_path = trace_path(start, goal)
+            best_path, points = trace_path(start, goal)
             # Update display
             draw_nodes(screen, nodes)
+            #pygame.draw.lines(screen, COLORS['path'], False, points, 3)
             pygame.display.flip()
             break
 
@@ -68,7 +69,7 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
             # Added neighbor to open_nodes if it isn't present
             if neighbor not in open_nodes:
                 open_nodes.append(neighbor)
-                neighbor.color = COLORS['day9']
+                neighbor.color = COLORS['explored']
 
         # Check if close button was pressed
         for event in pygame.event.get():

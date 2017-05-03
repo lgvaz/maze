@@ -1,15 +1,15 @@
 from utils import COLORS
 class Node:
     def __init__(self, i, j, w_spacement, h_spacement):
-        self.color = COLORS['white']
-        self.radius = 10
+        self.color = COLORS['gray2']
+        self.radius = 3
         self.parent = None
         # Node idxs
         self.i = i
         self.j = j
         # Node position on canvas
-        self.position = (i * w_spacement + w_spacement // 2,
-                         j * h_spacement + h_spacement // 2)
+        self.position = (j * w_spacement + w_spacement // 2,
+                         i * h_spacement + h_spacement // 2)
 
         # Cost from start to this node
         self.g_score = float('inf')

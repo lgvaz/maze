@@ -5,16 +5,16 @@ from node import Node
 from utils import *
 import time
 
-def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
+def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600):
     # Create nodes
     w_spacement = WIDTH // num_cols
     h_spacement = HEIGHT // num_rows
     nodes = [[Node(i, j, w_spacement, h_spacement)
-              for i in range(num_cols)] for j in range(num_rows)]
+              for j in range(num_cols)] for i in range(num_rows)]
 
     # Define start and goal node
     start = nodes[0][0]
-    goal = nodes[num_rows - 1][num_cols - 1]
+    goal = nodes[13][num_cols - 7]
     # Define start and goal attributes
     start.color = COLORS['green']
     goal.color = COLORS['red']
@@ -35,7 +35,7 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
         # Find the best node to expand
         if len(open_nodes) > 0:
             current = find_best_f(open_nodes)
-            current.color = COLORS['red']
+            current.color = COLORS['blue']
         else:
             print("Failure!")
             break
@@ -48,7 +48,7 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
             pygame.display.flip()
             break
 
-        #
+        # Update nodes
         open_nodes.remove(current)
         closed_nodes.append(current)
         # Begin exploring current neighbors
@@ -68,7 +68,7 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
             # Added neighbor to open_nodes if it isn't present
             if neighbor not in open_nodes:
                 open_nodes.append(neighbor)
-                neighbor.color = COLORS['blue']
+                neighbor.color = COLORS['day9']
 
         # Check if close button was pressed
         for event in pygame.event.get():
@@ -78,7 +78,7 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
         draw_nodes(screen, nodes)
         pygame.display.flip()
 
-        time.sleep(0.2)
+        time.sleep(.5)
 
     # Don't close screen after the code was executed, instead wait for user to close
     while not done:
@@ -86,11 +86,6 @@ def search(num_rows=30, num_cols=30, WIDTH=800, HEIGHT=600):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-
-    # for nodes_ in nodes:
-    #     print('\n')
-    #     for node in nodes_:
-    #         print(node.g_score, end='|')
 
 
 if __name__ == '__main__':

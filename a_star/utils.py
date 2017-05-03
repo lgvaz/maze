@@ -8,6 +8,7 @@ COLORS = {
     'wall': 0xfa4964,
     'node': 0x2c383e,
     'goal': 0xc3e875,
+    'current': 0x5d616c,
     'final_path': 0x377d42
 }
 
@@ -40,4 +41,6 @@ def trace_path(start, goal):
         current.color = COLORS['final_path']
         path.append(current)
         current = current.parent
+    start.color = COLORS['final_path']
+    path.append(start)
     return path

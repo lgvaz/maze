@@ -11,11 +11,16 @@ COLORS = {
     'final_path': 0x377d42
 }
 
-def draw_nodes(surface, nodes):
+def draw_nodes(surface, nodes, shape):
     surface.fill(COLORS['background'])
     for i_nodes in nodes:
         for node in i_nodes:
-            pygame.draw.circle(surface, node.color, node.position, node.radius)
+            if shape == 'rect':
+                pygame.draw.rect(surface, node.color, node.rect)
+            elif shape == 'circle':
+                pygame.draw.circle(surface, node.color, node.circle, node.radius)
+            else:
+                raise ValueError('Format "{}" not implemented'.format(shape))
 
 def euclidian_distance(node, goal):
     return ((goal.i - node.i)**2 +
@@ -30,11 +35,9 @@ def find_best_f(nodes):
 
 def trace_path(start, goal):
     path = []
-    path_pos = []
     current = goal
     while current is not start:
         current.color = COLORS['final_path']
         path.append(current)
-        path_pos.append(current.position)
         current = current.parent
-    return path, path_pos
+    return path

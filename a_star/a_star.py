@@ -5,7 +5,7 @@ from node import Node
 from utils import *
 import time
 
-def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
+def search(num_rows=100, num_cols=100, WIDTH=600, HEIGHT=600, wall_pct=0.3, shape='rect'):
     # Create nodes
     w_spacement = WIDTH // num_cols
     h_spacement = HEIGHT // num_rows
@@ -42,10 +42,9 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
         # Check if current node is the goal
         if current is goal:
             print("Done!")
-            best_path, points = trace_path(start, goal)
+            best_path = trace_path(start, goal)
             # Update display
-            draw_nodes(screen, nodes)
-            #pygame.draw.lines(screen, COLORS['path'], False, points, 3)
+            draw_nodes(screen, nodes, shape)
             pygame.display.flip()
             break
 
@@ -76,7 +75,7 @@ def search(num_rows=50, num_cols=50, WIDTH=800, HEIGHT=600, wall_pct=0.3):
             if event.type == pygame.QUIT:
                 done = True
         # Update display
-        draw_nodes(screen, nodes)
+        draw_nodes(screen, nodes, shape)
         pygame.display.flip()
 
         #time.sleep(.2)

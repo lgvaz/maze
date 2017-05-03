@@ -16,9 +16,10 @@ class Node:
         # Node idxs
         self.i = i
         self.j = j
-        # Node position on canvas
-        self.position = (j * w_spacement + w_spacement // 2,
+        # Circle of rectangle specs
+        self.circle = (j * w_spacement + w_spacement // 2,
                          i * h_spacement + h_spacement // 2)
+        self.rect = (j * w_spacement, i * h_spacement, w_spacement, h_spacement)
 
         # Cost from start to this node
         self.g_score = float('inf')

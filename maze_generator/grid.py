@@ -41,6 +41,8 @@ class Grid:
             neighbors.append(self.grid[cell.i][cell.j - 1])
         return neighbors
 
+    def unvisited_neighbors(self, cell):
+        return [neighbor for neighbor in self.neighbors(cell) if neighbor.visited == False]
 
 class Cell:
     def __init__(self, i, j, x_ss, y_ss):

@@ -40,4 +40,4 @@ def search(maze):
     open_cells.remove(current)
     closed_cells.append(current)
     # Check neighbors
-    print(maze.valid_neighbors(current))
+    neighbors = maze.valid_neighbors(current)

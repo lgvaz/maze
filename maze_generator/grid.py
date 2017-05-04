@@ -65,9 +65,22 @@ class Grid:
         return [neighbor for neighbor in self.neighbors(cell) if neighbor.visited == False]
 
     def valid_neighbors(self, cell):
+        i = cell.i
+        j = cell.j
         neighbors = []
-        if cell.j > 0 and cell.lines['top'][0] == False:
+        # Top neighbor
+        if cell.i > 0 and cell.lines['top'][0] == False:
+            neighbors.append(self.grid[i - 1][j])
+        # Bottom neighbor
+        if cell.i < self.num_rows - 2 and cell.lines['bottom'][0] == False:
+            neighbors.append(self.grid[i + 1][j])
+        # Right neighbor
+        if cell.j < self.num_cols - 2 and cell.lines['right'][0] == False:
+            neighbors.append(self.grid[i][j + 1])
+        # Left neighbor
+        if cell.j > 0 and cell.lines['left'][0] == False:
             neighbors.append(self.grid[i][j - 1])
+        return neighbors
 
     def remove_wall(self, cell1, cell2):
         if cell1.i - cell2.i == 1:

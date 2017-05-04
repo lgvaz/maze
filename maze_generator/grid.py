@@ -1,7 +1,7 @@
 import pygame
 
 class Grid:
-    def __init__(self, num_rows=10, num_cols=10, WIDTH=601, HEIGHT=601):
+    def __init__(self, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601):
         self.num_rows = num_rows
         self.num_cols = num_cols
         x_square_size = WIDTH // num_cols

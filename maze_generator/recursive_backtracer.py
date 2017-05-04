@@ -1,6 +1,5 @@
 import random
 from grid import Grid
-import time
 
 maze = Grid()
 # Define the start of the maze

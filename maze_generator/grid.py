@@ -1,25 +1,37 @@
 import pygame
 
 class Grid:
-    def __init__(self, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601):
+    def __init__(self, screen, num_rows=10, num_cols=10):
         self.num_rows = num_rows
         self.num_cols = num_cols
-        x_square_size = WIDTH // num_cols
-        y_square_size = HEIGHT // num_rows
+        w, h = pygame.display.get_surface().get_size()
+        x_square_size = w // num_cols
+        y_square_size = h // num_rows
         # Pygame setup
         pygame.init
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = screen
 
         self.grid = [[Cell(i, j, x_square_size, y_square_size) for j in range(num_cols)] for i in range(num_rows)]
+
+    def set_start(self, cell):
+        self.start = cell
+
+    def set_goal(self, cell):
+        self.goal = cell
 
     def draw(self, highlight_cell=None):
         self.screen.fill(0x212530)
         for row_cells in self.grid:
             for cell in row_cells:
+                # Color start cell
+                if cell is self.start:
+                    pygame.draw.rect(self.screen, 0x0000FF, cell.rect)
+                # Color goal cell
+                if cell is self.goal:
+                    pygame.draw.rect(self.screen, 0xD01037, cell.rect)
                 # Draw square if visited
-                if cell.visited == True:
+                elif cell.visited == True:
                     pygame.draw.rect(self.screen, 0xD3D5E1, cell.rect)
-                    pass
                 # Color highlight_cell differently
                 if highlight_cell:
                     pygame.draw.rect(self.screen, 0x10ED4F, highlight_cell.rect)
@@ -33,7 +45,6 @@ class Grid:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 raise ValueError('Window closed')
-
 
     def neighbors(self, cell):
         neighbors = []
@@ -92,10 +103,3 @@ class Cell:
                      i * y_ss,
                      x_ss,
                      y_ss)
-
-
-if __name__ == '__main__':
-    my_maze = Grid()
-    print(my_maze.neighbors(my_maze.grid[1][0]))
-    while True:
-        my_maze.draw()

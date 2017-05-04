@@ -35,7 +35,7 @@ class Grid:
             neighbors.append(self.grid[cell.i - 1][cell.j])
         if cell.j < self.num_cols - 1:
             neighbors.append(self.grid[cell.i][cell.j + 1])
-        if cell.i < self.num_rows:
+        if cell.i < self.num_rows - 1:
             neighbors.append(self.grid[cell.i + 1][cell.j])
         if cell.j > 0:
             neighbors.append(self.grid[cell.i][cell.j - 1])

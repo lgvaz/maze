@@ -41,3 +41,13 @@ def search(maze):
     closed_cells.append(current)
     # Check neighbors
     neighbors = maze.valid_neighbors(current)
+    for neighbor in neighbors:
+        # If neighbor was already explored, skip it
+        if neighbor in closed_cells:
+            continue
+        # g_score using current path
+        neighbor_g = current.g_score + 1
+        if neighbor_g < neighbor.g_score:
+            neighbor.g_score = neighbor_g
+            # Keep track of current path
+            neighbor.parent = current

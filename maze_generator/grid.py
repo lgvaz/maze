@@ -18,6 +18,7 @@ class Grid:
                 # Draw square if visited
                 if cell.visited == True:
                     pygame.draw.rect(self.screen, (0, 200, 0, 100), cell.rect)
+                    pass
                 # Draw each line of the cell
                 for wall, start, end in cell.lines.values():
                     if wall == True:
@@ -44,6 +45,23 @@ class Grid:
     def unvisited_neighbors(self, cell):
         return [neighbor for neighbor in self.neighbors(cell) if neighbor.visited == False]
 
+    def remove_wall(self, cell1, cell2):
+        if cell1.i - cell2.i == 1:
+            cell1.lines['top'][0] = False
+            cell2.lines['bottom'][0] = False
+        elif cell1.i - cell2.i == -1:
+            cell1.lines['bottom'][0] = False
+            cell2.lines['top'][0] = False
+        elif cell1.j - cell2.j == 1:
+            cell1.lines['left'][0] = False
+            cell2.lines['right'][0] = False
+        elif cell1.j - cell2.j == -1:
+            cell1.lines['right'][0] = False
+            cell2.lines['left'][0] = False
+        else:
+            raise ValueError('Cannot remove walls between non neighbor cells')
+
+
 class Cell:
     def __init__(self, i, j, x_ss, y_ss):
         # Cell identification
@@ -52,18 +70,18 @@ class Cell:
         self.visited = False
         # (Wall, start, end)
         self.lines = {
-            'top':      (True,
+            'top':      [True,
                          (j * x_ss, i * y_ss),
-                         (j * x_ss + x_ss, i * y_ss)),
-            'right':    (True,
+                         (j * x_ss + x_ss, i * y_ss)],
+            'right':    [True,
                          (j * x_ss + x_ss, i * y_ss),
-                         (j * x_ss + x_ss, i * y_ss + y_ss)),
-            'bottom':   (True,
+                         (j * x_ss + x_ss, i * y_ss + y_ss)],
+            'bottom':   [True,
                          (j * x_ss, i * y_ss + y_ss),
-                         (j * x_ss + x_ss, i * y_ss + y_ss)),
-            'left':     (True,
+                         (j * x_ss + x_ss, i * y_ss + y_ss)],
+            'left':     [True,
                          (j * x_ss, i * y_ss),
-                         (j * x_ss, i * y_ss + y_ss))
+                         (j * x_ss, i * y_ss + y_ss)]
         }
         self.rect = (j * x_ss,
                      i * y_ss,

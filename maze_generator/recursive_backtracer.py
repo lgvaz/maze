@@ -27,6 +27,9 @@ def create_maze(screen, num_rows=10, num_cols=10):
             current.visited = True
         elif stack:
             current = stack.pop()
+        # Else maze is done
+        else:
+            break
 
         maze.draw(current)
     return maze

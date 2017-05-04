@@ -46,6 +46,9 @@ class Grid:
             if event.type == pygame.QUIT:
                 raise ValueError('Window closed')
 
+    def get_size(self):
+        return self.num_rows, self.num_cols
+
     def neighbors(self, cell):
         neighbors = []
         if cell.i > 0:
@@ -60,6 +63,11 @@ class Grid:
 
     def unvisited_neighbors(self, cell):
         return [neighbor for neighbor in self.neighbors(cell) if neighbor.visited == False]
+
+    def valid_neighbors(self, cell):
+        neighbors = []
+        if cell.j > 0 and cell.lines['top'][0] == False:
+            neighbors.append(self.grid[i][j - 1])
 
     def remove_wall(self, cell1, cell2):
         if cell1.i - cell2.i == 1:

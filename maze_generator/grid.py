@@ -17,12 +17,12 @@ class Grid:
             for cell in row_cells:
                 # Draw square if visited
                 if cell.visited == True:
-                    pygame.draw.rect(self.screen, (0, 200, 0, 100), cell.rect)
+                    pygame.draw.rect(self.screen, 0xFFFFFF, cell.rect)
                     pass
                 # Draw each line of the cell
                 for wall, start, end in cell.lines.values():
                     if wall == True:
-                        pygame.draw.line(self.screen, 0xFFFFFF, start, end)
+                        pygame.draw.line(self.screen, 0x000000, start, end)
         # Update display
         pygame.display.flip()
         # Check if close button was pressed

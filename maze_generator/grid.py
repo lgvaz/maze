@@ -12,23 +12,28 @@ class Grid:
 
         self.grid = [[Cell(i, j, x_square_size, y_square_size) for j in range(num_cols)] for i in range(num_rows)]
 
-    def draw(self):
+    def draw(self, highlight_cell=None):
+        self.screen.fill(0x212530)
         for row_cells in self.grid:
             for cell in row_cells:
                 # Draw square if visited
                 if cell.visited == True:
-                    pygame.draw.rect(self.screen, 0xFFFFFF, cell.rect)
+                    pygame.draw.rect(self.screen, 0xD3D5E1, cell.rect)
                     pass
+                # Color highlight_cell differently
+                if highlight_cell:
+                    pygame.draw.rect(self.screen, 0x10ED4F, highlight_cell.rect)
                 # Draw each line of the cell
                 for wall, start, end in cell.lines.values():
                     if wall == True:
-                        pygame.draw.line(self.screen, 0x000000, start, end)
+                        pygame.draw.line(self.screen, 0x212530, start, end)
         # Update display
         pygame.display.flip()
         # Check if close button was pressed
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 raise ValueError('Window closed')
+
 
     def neighbors(self, cell):
         neighbors = []

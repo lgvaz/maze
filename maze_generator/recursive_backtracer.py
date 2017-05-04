@@ -25,4 +25,4 @@ while True:
     elif stack:
         current = stack.pop()
 
-    maze.draw()
+    maze.draw(current)

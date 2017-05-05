@@ -101,6 +101,16 @@ class Grid:
         else:
             raise ValueError('Cannot remove walls between non neighbor cells')
 
+    def trace_final_path(self):
+        path = []
+        current = self.goal
+        while current is not self.start:
+            path.append(current)
+            current.final_path = True
+            current = current.parent
+        path.append(self.start)
+        return path
+
 
 class Cell:
     def __init__(self, i, j, x_ss, y_ss):

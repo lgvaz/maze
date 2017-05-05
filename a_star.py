@@ -9,16 +9,6 @@ def find_best_f(cells):
             current_best = cell
     return current_best
 
-def trace_path(start, goal):
-    path = []
-    current = goal
-    while current is not start:
-        path.append(current)
-        current.final_path = True
-        current = current.parent
-    path.append(start)
-    return path
-
 def search(maze):
     # Initial setup
     start = maze.start
@@ -72,4 +62,4 @@ def search(maze):
         maze.draw(current)
 
     # Trace the final path
-    final_path = trace_path(start, goal)
+    final_path = maze.trace_final_path()

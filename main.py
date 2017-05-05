@@ -2,6 +2,7 @@ import pygame
 import fire
 import recursive_backtracer
 import a_star
+import depth_first
 
 def start(num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601):
     # Create pygame window
@@ -9,7 +10,7 @@ def start(num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601):
     # Create maze
     maze = recursive_backtracer.create_maze(screen, num_rows, num_cols)
     # Use a-star to find solution
-    a_star.search(maze)
+    depth_first.search(maze)
 
     while True:
         maze.draw()

@@ -1,16 +1,23 @@
-import time
-
-
 def euclidian_distance(cell, goal):
     return ((goal.i - cell.i)**2 +
             (goal.j - cell.j)**2) ** 0.5
 
-def find_best_f(nodes):
-    current_best = nodes[0]
-    for node in nodes:
-        if node.f_score < current_best.f_score:
-            current_best = node
+def find_best_f(cells):
+    current_best = cells[0]
+    for cell in cells:
+        if cell.f_score < current_best.f_score:
+            current_best = cell
     return current_best
+
+def trace_path(start, goal):
+    path = []
+    current = goal
+    while current is not start:
+        path.append(current)
+        current.final_path = True
+        current = current.parent
+    path.append(start)
+    return path
 
 def search(maze):
     # Initial setup
@@ -63,3 +70,6 @@ def search(maze):
                 # Calculate f_score
                 neighbor.f_score = neighbor.g_score + euclidian_distance(neighbor, goal)
         maze.draw(current)
+
+    # Trace the final path
+    final_path = trace_path(start, goal)

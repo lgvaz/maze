@@ -23,13 +23,13 @@ class Grid:
         self.screen.fill(0x212530)
         for row_cells in self.grid:
             for cell in row_cells:
-                # Color start cell
+                # Color cells
                 if cell is self.start:
                     pygame.draw.rect(self.screen, 0x0000FF, cell.rect)
-                # Color goal cell
-                if cell is self.goal:
+                elif cell is self.goal:
                     pygame.draw.rect(self.screen, 0xD01037, cell.rect)
-                # Draw square if visited
+                elif cell.final_path == True:
+                    pygame.draw.rect(self.screen, 0xDB8B12, cell.rect)
                 elif cell.explored == True:
                     pygame.draw.rect(self.screen, 0x34CBB0, cell.rect)
                 elif cell.visited == True:
@@ -108,6 +108,7 @@ class Cell:
         self.j = j
         self.visited = False
         self.explored = False
+        self.final_path = False
         # (Wall, start, end)
         self.lines = {
             'top':      [True,

@@ -1,7 +1,7 @@
 import pygame
 
 class Grid:
-    def __init__(self, screen, num_rows=50, num_cols=50):
+    def __init__(self, screen, num_rows, num_cols):
         self.num_rows = num_rows
         self.num_cols = num_cols
         w, h = pygame.display.get_surface().get_size()
@@ -38,9 +38,10 @@ class Grid:
                 if highlight_cell:
                     pygame.draw.rect(self.screen, 0x10ED4F, highlight_cell.rect)
                 # Draw each line of the cell
-                for wall, start, end in cell.lines.values():
-                    if wall == True:
-                        pygame.draw.line(self.screen, 0x212530, start, end)
+                if cell.visited == True:
+                    for wall, start, end in cell.lines.values():
+                        if wall == True:
+                            pygame.draw.line(self.screen, 0x212530, start, end)
         # Update display
         pygame.display.flip()
         # Check if close button was pressed

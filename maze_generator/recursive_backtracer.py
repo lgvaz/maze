@@ -1,8 +1,8 @@
 import random
 from grid import Grid
 
-def create_maze(screen, num_rows=50, num_cols=50):
-    maze = Grid(screen)
+def create_maze(screen, num_rows, num_cols):
+    maze = Grid(screen, num_rows, num_cols)
     # Define the start of the maze
     current = maze.grid[0][0]
     maze.set_start(current)

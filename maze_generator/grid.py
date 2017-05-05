@@ -1,7 +1,7 @@
 import pygame
 
 class Grid:
-    def __init__(self, screen, num_rows=10, num_cols=10):
+    def __init__(self, screen, num_rows=50, num_cols=50):
         self.num_rows = num_rows
         self.num_cols = num_cols
         w, h = pygame.display.get_surface().get_size()
@@ -30,6 +30,8 @@ class Grid:
                 if cell is self.goal:
                     pygame.draw.rect(self.screen, 0xD01037, cell.rect)
                 # Draw square if visited
+                elif cell.explored == True:
+                    pygame.draw.rect(self.screen, 0x34CBB0, cell.rect)
                 elif cell.visited == True:
                     pygame.draw.rect(self.screen, 0xD3D5E1, cell.rect)
                 # Color highlight_cell differently
@@ -72,10 +74,10 @@ class Grid:
         if cell.i > 0 and cell.lines['top'][0] == False:
             neighbors.append(self.grid[i - 1][j])
         # Bottom neighbor
-        if cell.i < self.num_rows - 2 and cell.lines['bottom'][0] == False:
+        if cell.i < self.num_rows - 1 and cell.lines['bottom'][0] == False:
             neighbors.append(self.grid[i + 1][j])
         # Right neighbor
-        if cell.j < self.num_cols - 2 and cell.lines['right'][0] == False:
+        if cell.j < self.num_cols - 1 and cell.lines['right'][0] == False:
             neighbors.append(self.grid[i][j + 1])
         # Left neighbor
         if cell.j > 0 and cell.lines['left'][0] == False:
@@ -105,6 +107,7 @@ class Cell:
         self.i = i
         self.j = j
         self.visited = False
+        self.explored = False
         # (Wall, start, end)
         self.lines = {
             'top':      [True,

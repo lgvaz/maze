@@ -1,3 +1,6 @@
+import time
+
+
 def euclidian_distance(cell, goal):
     return ((goal.i - cell.i)**2 +
             (goal.j - cell.j)**2) ** 0.5
@@ -30,24 +33,33 @@ def search(maze):
     start.f_score = euclidian_distance(start, goal)
 
     # Main loop
-    #while open_cells:
+    while open_cells:
         # Select cell with lowest f_score from open_cells
-    current = find_best_f(open_cells)
-    # Check if current cell is the goal
-    if current is goal:
-        print('DONE!')
-    # Update evaluated cells
-    open_cells.remove(current)
-    closed_cells.append(current)
-    # Check neighbors
-    neighbors = maze.valid_neighbors(current)
-    for neighbor in neighbors:
-        # If neighbor was already explored, skip it
-        if neighbor in closed_cells:
-            continue
-        # g_score using current path
-        neighbor_g = current.g_score + 1
-        if neighbor_g < neighbor.g_score:
-            neighbor.g_score = neighbor_g
-            # Keep track of current path
-            neighbor.parent = current
+        current = find_best_f(open_cells)
+        # Check if current cell is the goal
+        if current is goal:
+            print('DONE!')
+            break
+        # Update evaluated cells
+        current.explored = True
+        open_cells.remove(current)
+        closed_cells.append(current)
+        # Check neighbors
+        neighbors = maze.valid_neighbors(current)
+        for neighbor in neighbors:
+            # If neighbor was already explored, skip it
+            if neighbor in closed_cells:
+                continue
+            # Add neighbor to open_cells
+            if neighbor not in open_cells:
+                open_cells.append(neighbor)
+            # g_score using current path
+            neighbor_g = current.g_score + 1
+            # Test if g_score is better using current path
+            if neighbor_g <= neighbor.g_score:
+                neighbor.g_score = neighbor_g
+                # Keep track of current path
+                neighbor.parent = current
+                # Calculate f_score
+                neighbor.f_score = neighbor.g_score + euclidian_distance(neighbor, goal)
+        maze.draw(current)

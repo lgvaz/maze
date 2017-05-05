@@ -10,5 +10,8 @@ def start(WIDTH=601, HEIGHT=601):
     # Use a-star to find solution
     a_star.search(maze)
 
+    while True:
+        maze.draw()
+
 if __name__ == '__main__':
     start()

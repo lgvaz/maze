@@ -1,6 +1,8 @@
 import pygame
 
+
 class Grid:
+
     def __init__(self, screen, num_rows, num_cols):
         self.num_rows = num_rows
         self.num_cols = num_cols
@@ -10,7 +12,7 @@ class Grid:
         # Pygame setup
         pygame.init
         self.screen = screen
-
+        # Create grid
         self.grid = [[Cell(i, j, x_square_size, y_square_size) for j in range(num_cols)] for i in range(num_rows)]
 
     def set_start(self, cell):

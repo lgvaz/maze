@@ -1,10 +1,9 @@
 def search(maze, render):
     start = maze.start
     goal = maze.goal
-
     # Keep track of cells left to explore
     open_cells = [start]
-
+    
     while open_cells:
         # Move to new cell
         current = open_cells.pop()

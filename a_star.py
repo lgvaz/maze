@@ -2,12 +2,14 @@ def euclidian_distance(cell, goal):
     return ((goal.i - cell.i)**2 +
             (goal.j - cell.j)**2) ** 0.5
 
+
 def find_best_f(cells):
     current_best = cells[0]
     for cell in cells:
         if cell.f_score < current_best.f_score:
             current_best = cell
     return current_best
+
 
 def search(maze, render):
     # Initial setup

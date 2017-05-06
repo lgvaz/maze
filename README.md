@@ -4,6 +4,9 @@ Inspired by Daniel Shiffman videos on the topic:
 * [Maze generator](https://www.youtube.com/watch?v=HyK_Q5rrcr4)
 * [A* search](https://www.youtube.com/watch?v=aKYlikFAV4k)
 
+Example solution:  
+![A_star solution](images/a_star_sol.png?raw=True)
+
 # Usage
 To run with default parameters, do:  
 `python main.py <pathfind>`  

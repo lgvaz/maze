@@ -1,4 +1,4 @@
-def search(maze):
+def search(maze, render):
     start = maze.start
     goal = maze.goal
 
@@ -9,7 +9,7 @@ def search(maze):
         # Move to new cell
         current = open_cells.pop()
         if current is goal:
-            print('Solution found')
+            print('Solution found!')
             maze.trace_final_path()
             break
         # Don't go to already explored cells
@@ -20,4 +20,5 @@ def search(maze):
                 if neighbor.explored == False:
                     open_cells.append(neighbor)
                     neighbor.parent = current
-            maze.draw(current)
+            if render:
+                maze.draw(current)

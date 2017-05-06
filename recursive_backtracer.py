@@ -1,7 +1,7 @@
 import random
 from grid import Grid
 
-def create_maze(screen, num_rows, num_cols):
+def create_maze(screen, num_rows, num_cols, render):
     maze = Grid(screen, num_rows, num_cols)
     # Define the start of the maze
     current = maze.grid[0][0]
@@ -31,5 +31,6 @@ def create_maze(screen, num_rows, num_cols):
         else:
             break
 
-        maze.draw(current)
+        if render:
+            maze.draw(current)
     return maze

@@ -9,7 +9,7 @@ def find_best_f(cells):
             current_best = cell
     return current_best
 
-def search(maze):
+def search(maze, render):
     # Initial setup
     start = maze.start
     goal = maze.goal
@@ -35,7 +35,7 @@ def search(maze):
         current = find_best_f(open_cells)
         # Check if current cell is the goal
         if current is goal:
-            print('DONE!')
+            print('Solution found!')
             break
         # Update evaluated cells
         current.explored = True
@@ -59,7 +59,8 @@ def search(maze):
                 neighbor.parent = current
                 # Calculate f_score
                 neighbor.f_score = neighbor.g_score + euclidian_distance(neighbor, goal)
-        maze.draw(current)
+        if render:
+            maze.draw(current)
 
     # Trace the final path
     final_path = maze.trace_final_path()

@@ -120,6 +120,7 @@ class Cell:
         self.visited = False
         self.explored = False
         self.final_path = False
+        self.parent = None
         # (Wall, start, end)
         self.lines = {
             'top':      [True,

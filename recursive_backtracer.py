@@ -5,8 +5,8 @@ from grid import Grid
 def create_maze(screen, num_rows, num_cols, render):
     maze = Grid(screen, num_rows, num_cols)
     # Define the start of the maze
-    current = maze.grid[0][0]
-    maze.set_start(current)
+    maze.set_start(maze.grid[0][0])
+    current = maze.grid[random.randint(0, num_rows - 1)][random.randint(0, num_cols - 1)]
     current.visited = True
     # Define maze goal
     maze.set_goal(maze.grid[num_rows - 1][num_cols - 1])
@@ -33,5 +33,5 @@ def create_maze(screen, num_rows, num_cols, render):
             break
         if render:
             maze.draw(current)
-            
+
     return maze

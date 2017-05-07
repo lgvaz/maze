@@ -2,11 +2,15 @@ import random
 from grid import Grid
 
 
-def create_maze(screen, num_rows, num_cols, render):
+def create_maze(screen, mode, num_rows, num_cols, render):
+    ''' Growing tree algorithm.
+    Can behave like "recursive backtracking" or almost like "Prim's"
+    with little change.
+    '''
     maze = Grid(screen, num_rows, num_cols)
     # Define the start of the maze
     maze.set_start(maze.grid[0][0])
-    current = maze.grid[random.randint(0, num_rows - 1)][random.randint(0, num_cols - 1)]
+    current = maze.grid[random.randrange(num_rows)][random.randrange(num_cols)]
     current.visited = True
     # Define maze goal
     maze.set_goal(maze.grid[num_rows - 1][num_cols - 1])
@@ -27,7 +31,10 @@ def create_maze(screen, num_rows, num_cols, render):
             current = r_neighbor
             current.visited = True
         elif stack:
-            current = stack.pop()
+            if mode == 'prim':
+                current = stack.pop(random.randrange(len(stack)))
+            elif mode == 'backtracker':
+                current = stack.pop()
         # Else maze is done
         else:
             break

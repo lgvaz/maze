@@ -4,12 +4,16 @@ Inspired by Daniel Shiffman videos on the topic:
 * [Maze generator](https://www.youtube.com/watch?v=HyK_Q5rrcr4)
 * [A* search](https://www.youtube.com/watch?v=aKYlikFAV4k)
 
+Example solution:  
+![A_star solution](images/a_star_sol.png?raw=True)
+
 # Usage
 To run with default parameters, do:  
-`python main.py <pathfind>`  
-Where `<pathfind>` should be the name of an implemented search algorithm (a_star, depth_first).
+`python main.py <generator> <pathfind>`  
+`<generator>` should be the name of an implemented maze generator algorithm (backtracer, prim).  
+`<pathfind>` should be the name of an implemented search algorithm (a_star, depth_first).
 
-# Options
+## Options
 For big mazes is better to not render interactively when building and solving, the flag `--norender` can be used to only render the final solution.  
-The size of the maze can be changed using the `--num_rows=<int>` and `num_cols=<int>` options.  
+The size of the maze can be changed using the `--num_rows=<int>` and `--num_cols=<int>` options.  
 For a list of all avaiable options run: `python main.py -- --help`

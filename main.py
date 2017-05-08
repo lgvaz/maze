@@ -1,10 +1,12 @@
-import pygame
+import sys
+import random
 import fire
+import pygame
 import growing_tree
 import a_star
 import depth_first
 
-def start(generator, search, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601, render=True):
+def start(generator, search, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601, seed=None, render=True):
     ''' Generate and solve mazes.
 
     Args:
@@ -14,8 +16,14 @@ def start(generator, search, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601, re
         num_cols (int): Number of cells of each row
         WIDTH (int): Screen width (Number of pixels)
         HEIGHT (int): Screen height (Number of pixels)
+        seed (int): The seed used by random numbers generator
         render (bool): Whether or not to render maze while creating and solving
     '''
+    # Set random seed
+    if not seed:
+        seed = random.randint(0, sys.maxsize)
+    random.seed(seed)
+    print('Seed: {}'.format(seed))
     # Create pygame window
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     # Create maze

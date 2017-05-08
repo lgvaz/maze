@@ -20,6 +20,7 @@ def start(generator, search, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601, re
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     # Create maze
     maze = growing_tree.create_maze(screen, generator, num_rows, num_cols, render)
+    maze.draw()
     # Use specified algorithm to find solution
     eval(search).search(maze, render)
 

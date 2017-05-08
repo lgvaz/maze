@@ -19,7 +19,6 @@ def create_maze(screen, mode, num_rows, num_cols, render):
     while True:
         # Find unvisited neighbors
         neighbors = maze.unvisited_neighbors(current)
-        # If they're neighbors
         if neighbors:
             if len(neighbors) > 1:
                 stack.append(current)

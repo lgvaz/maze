@@ -16,7 +16,7 @@ def start(generator, search, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601, se
         num_cols (int): Number of cells of each row
         WIDTH (int): Screen width (Number of pixels)
         HEIGHT (int): Screen height (Number of pixels)
-        seed (int): The seed used by random numbers generator
+        seed (int): The seed used by the random numbers generator
         render (bool): Whether or not to render maze while creating and solving
     '''
     # Set random seed
@@ -34,6 +34,7 @@ def start(generator, search, num_rows=50, num_cols=50, WIDTH=601, HEIGHT=601, se
 
     while True:
         maze.draw()
+
 
 if __name__ == '__main__':
     fire.Fire(start)

@@ -2,6 +2,9 @@ def euclidian_distance(cell, goal):
     return ((goal.i - cell.i)**2 +
             (goal.j - cell.j)**2) ** 0.5
 
+def manhattan_distance(cell, goal):
+    return (abs(goal.i - cell.i) +
+            abs(goal.j - cell.j))
 
 def find_best_f(cells):
     current_best = cells[0]
@@ -29,7 +32,8 @@ def search(maze, render):
             cell.f_score = float('inf')
     # g_score of start cell is zero
     start.g_score = 0
-    start.f_score = euclidian_distance(start, goal)
+#    start.f_score = euclidian_distance(start, goal)
+    start.f_score = manhattan_distance(start, goal)
 
     # Main loop
     while open_cells:
@@ -60,7 +64,8 @@ def search(maze, render):
                 # Keep track of current path
                 neighbor.parent = current
                 # Calculate f_score
-                neighbor.f_score = neighbor.g_score + euclidian_distance(neighbor, goal)
+#                neighbor.f_score = neighbor.g_score + euclidian_distance(neighbor, goal)
+                neighbor.f_score = neighbor.g_score + manhattan_distance(neighbor, goal)
         if render:
             maze.draw(current)
 
